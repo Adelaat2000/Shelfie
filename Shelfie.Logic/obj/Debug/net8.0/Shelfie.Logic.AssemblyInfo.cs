@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Shelfie.Logic")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b89b1a6069ccede303f1afe03047bed2dcb776dc")]
 [assembly: System.Reflection.AssemblyProductAttribute("Shelfie.Logic")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Shelfie.Logic")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

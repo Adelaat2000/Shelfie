@@ -25,7 +25,11 @@
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "/Users/alexander/RiderProjects/alexander-de-laat/Individuele_projecten/Shelfie/Shelfie.Logic/Shelfie.Logic.csproj": {
+                "projectPath": "/Users/alexander/RiderProjects/alexander-de-laat/Individuele_projecten/Shelfie/Shelfie.Logic/Shelfie.Logic.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -100,11 +104,7 @@
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
-            "projectReferences": {
-              "/Users/alexander/RiderProjects/alexander-de-laat/Individuele_projecten/Shelfie/Shelfie.Dal/Shelfie.Dal.csproj": {
-                "projectPath": "/Users/alexander/RiderProjects/alexander-de-laat/Individuele_projecten/Shelfie/Shelfie.Dal/Shelfie.Dal.csproj"
-              }
-            }
+            "projectReferences": {}
           }
         },
         "warningProperties": {
@@ -122,6 +122,12 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "MicrosoftEntityFramework": {
+              "target": "Package",
+              "version": "[1.0.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

@@ -1,10 +1,11 @@
 using Shelfie.Logic;
-using Shelfie.Dal.Models;
+using Shelfie.Logic.Models;
 
 namespace Shelfie.Logic.Services;
 
 public interface IAccountService
 {
-    Task<bool> GebruikerBestaatAsync(string gebruikersnaam, string email);
-    Task RegistreerGebruikerAsync(Gebruiker newUser, string password);
+    bool RegisterUser(string gebruikersnaam, string email, string wachtwoord);
+    bool UpdateProfile(int gebruikerId, string persoonlijkeInfo);
+    Gebruiker ValidateUser(string gebruikersnaam, string wachtwoord);
 }

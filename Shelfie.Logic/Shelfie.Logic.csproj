@@ -7,11 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Shelfie.Dal\Shelfie.Dal.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Services\" />
+      <PackageReference Include="MicrosoftEntityFramework" Version="1.0.0" />
     </ItemGroup>
 
 </Project>

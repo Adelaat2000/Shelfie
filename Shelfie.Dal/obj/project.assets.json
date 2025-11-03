@@ -876,6 +876,9 @@
           }
         }
       },
+      "MicrosoftEntityFramework/1.0.0": {
+        "type": "package"
+      },
       "Mono.TextTemplating/2.2.1": {
         "type": "package",
         "dependencies": {
@@ -1493,6 +1496,19 @@
             "assetType": "runtime",
             "rid": "win"
           }
+        }
+      },
+      "Shelfie.Logic/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "MicrosoftEntityFramework": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Shelfie.Logic.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Shelfie.Logic.dll": {}
         }
       }
     }
@@ -2887,6 +2903,20 @@
         "useSharedDesignerContext.txt"
       ]
     },
+    "MicrosoftEntityFramework/1.0.0": {
+      "sha512": "3bAlMPxzyqAsSjTt2CdjgjheZAH4RjkFEe0lrhUCaWh0i6BVofc7P37JSnQE4SYTMgCqzDyT7svp/k/tgOAW9g==",
+      "type": "package",
+      "path": "microsoftentityframework/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "ERD.vsdx",
+        "ayecode.txt",
+        "microsoftentityframework.1.0.0.nupkg.sha512",
+        "microsoftentityframework.nuspec",
+        "qwe.bacpac"
+      ]
+    },
     "Mono.TextTemplating/2.2.1": {
       "sha512": "KZYeKBET/2Z0gY1WlTAK7+RHTl7GSbtvTLDXEZZojUdAPqpQNDL6tHv7VUpqfX5VEOh+uRGKaZXkuD253nEOBQ==",
       "type": "package",
@@ -3996,13 +4026,19 @@
         "system.windows.extensions.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "Shelfie.Logic/1.0.0": {
+      "type": "project",
+      "path": "../Shelfie.Logic/Shelfie.Logic.csproj",
+      "msbuildProject": "../Shelfie.Logic/Shelfie.Logic.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
       "Microsoft.EntityFrameworkCore >= 8.0.21",
       "Microsoft.EntityFrameworkCore.SqlServer >= 8.0.21",
-      "Microsoft.EntityFrameworkCore.Tools >= 8.0.21"
+      "Microsoft.EntityFrameworkCore.Tools >= 8.0.21",
+      "Shelfie.Logic >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -4029,7 +4065,11 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "/Users/alexander/RiderProjects/alexander-de-laat/Individuele_projecten/Shelfie/Shelfie.Logic/Shelfie.Logic.csproj": {
+              "projectPath": "/Users/alexander/RiderProjects/alexander-de-laat/Individuele_projecten/Shelfie/Shelfie.Logic/Shelfie.Logic.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

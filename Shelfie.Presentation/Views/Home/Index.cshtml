@@ -1,8 +1,22 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    Layout = null;
+    ViewData["Title"] = "Homepage";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+<h1>Welkom bij Shelfie</h1>
+<p>Je bent succesvol geregistreerd en ingelogd.</p>
+
+<ul>
+    <li><a asp-controller="Boekenkast" asp-action="Index">Bekijk mijn Boekenkast</a></li>
+    <li><a asp-controller="Search" asp-action="Index">Zoek Boeken</a></li>
+    <li><a asp-controller="Account" asp-action="EditProfile">Bewerk Profiel</a></li>
+</ul>
+</body>
+</html>

@@ -1,17 +1,35 @@
-using Microsoft.EntityFrameworkCore;
-using Shelfie.Dal;
-using Shelfie.Logic;
+using Shelfie.Logic.Interfaces;
+using Shelfie.Logic.Models;
 using Shelfie.Logic.Services;
+using Shelfie.Dal;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-builder.Services.AddDbContext<ShelfieDbContext>(options =>
-    options.UseSqlServer(connectionString));
+// Repos
+builder.Services.AddScoped<IGebruikerRepository>(_ => new GebruikerRepository(connectionString));
+builder.Services.AddScoped<IBoekRepository>(_ => new BoekRepository(connectionString));
 
+// Services
 builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddScoped<IBoekenkastService, BoekenkastService>();
+builder.Services.AddScoped<ISearchService, SearchService>();
 
+// AUTHENTICATION
+builder.Services
+    .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, opts =>
+    {
+        opts.LoginPath = "/Account/Login";
+    });
+
+// AUTHORIZATION
+builder.Services.AddAuthorization();
+
+// MVC
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
@@ -27,9 +45,13 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+// MUST be before UseAuthorization
+app.UseAuthentication();
 app.UseAuthorization();
 
+// Default route → Register page
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Account}/{action=Register}/{id?}");
+
 app.Run();
