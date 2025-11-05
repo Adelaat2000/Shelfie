@@ -1,9 +1,10 @@
-using Shelfie.Logic.Models;
 using System.Collections.Generic;
+
+using Shelfie.Logic.DTOs;
 
 namespace Shelfie.Logic.Interfaces;
 
 public interface IBoekenkastService
 {
-    List<Boek> GetBoekenkastForUser(int gebruikerId);
+    IReadOnlyList<BoekDto> GetBoekenkastForUser(int gebruikerId);
 }

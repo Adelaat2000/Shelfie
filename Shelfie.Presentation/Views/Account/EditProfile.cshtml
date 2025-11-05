@@ -4,7 +4,12 @@
     ViewData["Title"] = "Profiel Bewerken";
 }
 
-<h2>@ViewData["Title"]</h2>
+<h2>Use case 5 — @ViewData["Title"]</h2>
+
+@if (TempData.ContainsKey("ProfileUpdated"))
+{
+    <div class="alert alert-success">@TempData["ProfileUpdated"]</div>
+}
 
 <div class="row">
     <div class="col-md-6">

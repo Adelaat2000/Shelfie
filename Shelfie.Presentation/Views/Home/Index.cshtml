@@ -1,22 +1,40 @@
-﻿@{
+@{
     Layout = null;
     ViewData["Title"] = "Homepage";
 }
 
 <!DOCTYPE html>
-<html>
+<html lang="nl">
 <head>
-    <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
 </head>
-<body>
-<h1>Welkom bij Shelfie</h1>
-<p>Je bent succesvol geregistreerd en ingelogd.</p>
+<body class="bg-light">
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3">Welkom bij Shelfie</h1>
+        <form asp-controller="Account" asp-action="Logout" method="post" class="m-0">
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-outline-secondary">Uitloggen</button>
+        </form>
+    </div>
 
-<ul>
-    <li><a asp-controller="Boekenkast" asp-action="Index">Bekijk mijn Boekenkast</a></li>
-    <li><a asp-controller="Search" asp-action="Index">Zoek Boeken</a></li>
-    <li><a asp-controller="Account" asp-action="EditProfile">Bewerk Profiel</a></li>
-</ul>
+    <p class="lead">Je bent succesvol ingelogd. Use case 1 (registreren) en use case 2 (inloggen) rond je af via het Account-menu.</p>
+    <p>Kies hieronder een van de overige use-cases om verder te gaan:</p>
+
+    <ul class="list-group">
+        <li class="list-group-item">
+            <a asp-controller="Boekenkast" asp-action="Index">Use case 3 — Bekijk mijn boekenkast</a>
+        </li>
+        <li class="list-group-item">
+            <a asp-controller="Search" asp-action="Index">Use case 4 — Zoek boeken</a>
+        </li>
+        <li class="list-group-item">
+            <a asp-controller="Account" asp-action="EditProfile">Use case 5 — Bewerk profiel</a>
+        </li>
+    </ul>
+</div>
 </body>
 </html>

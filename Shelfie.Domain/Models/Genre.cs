@@ -1,4 +1,4 @@
-namespace Shelfie.Logic.Models;
+namespace Shelfie.Domain.Models;
 
 public class Genre
 {

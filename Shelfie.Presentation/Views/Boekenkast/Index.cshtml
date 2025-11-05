@@ -4,7 +4,7 @@
     ViewData["Title"] = "Mijn Boekenkast";
 }
 
-<h2>@ViewData["Title"]</h2>
+<h2>Use case 3 — @ViewData["Title"]</h2>
 <hr />
 
 @if (Model.Count == 0)
@@ -20,7 +20,7 @@ else
         <tr>
             <th>Titel</th>
             <th>ISBN</th>
-            <th>Auteur (Placeholder)</th>
+            <th>Auteur(s)</th>
         </tr>
         </thead>
         <tbody>
@@ -29,7 +29,7 @@ else
             <tr>
                 <td>@boek.Titel</td>
                 <td>@boek.ISBN</td>
-                <td>@boek.AuteurNaam</td>
+                <td>@(string.IsNullOrWhiteSpace(boek.AuteurNaam) ? "-" : boek.AuteurNaam)</td>
             </tr>
         }
         </tbody>

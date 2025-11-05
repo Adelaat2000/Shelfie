@@ -4,7 +4,7 @@
     ViewData["Title"] = "Zoekresultaten";
 }
 
-<h2>@ViewData["Title"]</h2>
+<h2>Use case 4 — @ViewData["Title"]</h2>
 
     <h4>U zocht op: "@Model.SearchTerm" (Type: @Model.SearchType)</h4>
     <hr />
@@ -20,7 +20,7 @@ else
         <tr>
         <th>Titel</th>
         <th>ISBN</th>
-        <th>Auteur (Placeholder)</th>
+        <th>Auteur(s)</th>
         </tr>
         </thead>
         <tbody>
@@ -29,7 +29,7 @@ else
         <tr>
             <td>@boek.Titel</td>
             <td>@boek.ISBN</td>
-            <td>@boek.AuteurNaam</td>
+            <td>@(string.IsNullOrWhiteSpace(boek.AuteurNaam) ? "-" : boek.AuteurNaam)</td>
             </tr>
     }
     </tbody>

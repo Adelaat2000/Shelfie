@@ -1,9 +1,8 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Shelfie.Domain.Interfaces;
 using Shelfie.Logic.Interfaces;
-using Shelfie.Logic.Models;
 using Shelfie.Logic.Services;
 using Shelfie.Dal;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 

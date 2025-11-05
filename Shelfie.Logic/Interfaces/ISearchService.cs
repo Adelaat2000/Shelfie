@@ -1,9 +1,10 @@
-using Shelfie.Logic.Models;
 using System.Collections.Generic;
+
+using Shelfie.Logic.DTOs;
 
 namespace Shelfie.Logic.Interfaces;
 
 public interface ISearchService
 {
-    List<Boek> SearchBoeken(string searchTerm, string searchType);
+    IReadOnlyList<BoekDto> SearchBoeken(string searchTerm, string searchType);
 }

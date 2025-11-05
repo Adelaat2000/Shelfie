@@ -1,6 +1,7 @@
-using Shelfie.Logic.Interfaces;
-using Shelfie.Logic.Models;
-using Shelfie.Logic.Services;
+using Shelfie.Domain.Interfaces;
+using Shelfie.Domain.Models;
+
+namespace Shelfie.Logic.Services;
 
 public class AccountService : IAccountService
 {
@@ -10,15 +11,14 @@ public class AccountService : IAccountService
     {
         _gebruikerRepo = gebruikerRepo;
     }
+
     public bool RegisterUser(string gebruikersnaam, string email, string wachtwoord)
-    
     {
-        // Business Logic (Validatie)
         if (_gebruikerRepo.GetByEmail(email) != null)
         {
             return false;
         }
-        
+
         var wachtwoordHash = wachtwoord;
 
         var nieuweGebruiker = new Gebruiker
@@ -32,10 +32,16 @@ public class AccountService : IAccountService
         };
 
         _gebruikerRepo.AddUser(nieuweGebruiker);
-        
+
         return true;
     }
-    public Gebruiker ValidateUser(string gebruikersnaam, string wachtwoord)
+
+    public Gebruiker? GetById(int gebruikerId)
+    {
+        return _gebruikerRepo.GetById(gebruikerId);
+    }
+
+    public Gebruiker? ValidateUser(string gebruikersnaam, string wachtwoord)
     {
         var gebruiker = _gebruikerRepo.GetByUsername(gebruikersnaam);
 
@@ -43,7 +49,7 @@ public class AccountService : IAccountService
         {
             return null;
         }
-        
+
         if (gebruiker.WachtwoordHash == wachtwoord)
         {
             return gebruiker;
@@ -52,14 +58,27 @@ public class AccountService : IAccountService
         return null;
     }
 
-    public bool UpdateProfile(int gebruikerId, string persoonlijkeInfo)
+    public bool UpdateProfile(int gebruikerId, string? persoonlijkeInfo, string? icoonUrl, string? bannerUrl)
     {
-        var tempGebruiker = new Gebruiker { 
-            GebruikerID = gebruikerId, 
-            PersoonlijkeInfo = persoonlijkeInfo 
-        };
+        var huidigeGebruiker = _gebruikerRepo.GetById(gebruikerId);
+        if (huidigeGebruiker == null)
+        {
+            return false;
+        }
 
-        _gebruikerRepo.UpdateProfile(tempGebruiker);
+        huidigeGebruiker.PersoonlijkeInfo = string.IsNullOrWhiteSpace(persoonlijkeInfo) ? null : persoonlijkeInfo;
+
+        if (!string.IsNullOrEmpty(icoonUrl))
+        {
+            huidigeGebruiker.IcoonURL = icoonUrl;
+        }
+
+        if (!string.IsNullOrEmpty(bannerUrl))
+        {
+            huidigeGebruiker.BannerURL = bannerUrl;
+        }
+
+        _gebruikerRepo.UpdateProfile(huidigeGebruiker);
         return true;
     }
 }
