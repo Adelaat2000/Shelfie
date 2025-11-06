@@ -1,7 +1,8 @@
 using Shelfie.Logic.Interfaces;
 using Shelfie.Logic.Models;
-using System;
 using System.Collections.Generic;
+
+namespace Shelfie.Logic.Services;
 
 public class BoekenkastService : IBoekenkastService
 {

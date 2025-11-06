@@ -1,6 +1,7 @@
 using Shelfie.Logic.Interfaces;
 using Shelfie.Logic.Models;
 using Microsoft.Data.SqlClient;
+using System;
 
 namespace Shelfie.Dal;
 public class GebruikerRepository : IGebruikerRepository
@@ -67,28 +68,6 @@ public class GebruikerRepository : IGebruikerRepository
                 command.Parameters.AddWithValue("@PersoonlijkeInfo", (object)gebruiker.PersoonlijkeInfo ?? DBNull.Value);
                 command.Parameters.AddWithValue("@BannerURL", (object)gebruiker.BannerURL ?? DBNull.Value);
                 command.Parameters.AddWithValue("@IcoonURL", (object)gebruiker.IcoonURL ?? DBNull.Value);
-
-                connection.Open();
-                command.ExecuteNonQuery();
-            }
-        }
-    }
-    public void UpdateProfile(Gebruiker gebruiker)
-    {
-        using (var connection = new SqlConnection(_connectionString))
-        {
-            var sql = @"UPDATE Gebruiker 
-                        SET PersoonlijkeInfo = @PersoonlijkeInfo, 
-                            BannerURL = @BannerURL, 
-                            IcoonURL = @IcoonURL
-                        WHERE GebruikerID = @GebruikerID";
-
-            using (var command = new SqlCommand(sql, connection))
-            {
-                command.Parameters.AddWithValue("@PersoonlijkeInfo", (object)gebruiker.PersoonlijkeInfo ?? DBNull.Value);
-                command.Parameters.AddWithValue("@BannerURL", (object)gebruiker.BannerURL ?? DBNull.Value);
-                command.Parameters.AddWithValue("@IcoonURL", (object)gebruiker.IcoonURL ?? DBNull.Value);
-                command.Parameters.AddWithValue("@GebruikerID", gebruiker.GebruikerID);
 
                 connection.Open();
                 command.ExecuteNonQuery();

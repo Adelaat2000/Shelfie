@@ -1,9 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Shelfie.Logic.Interfaces;
 using Shelfie.Presentation.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
+
+namespace Shelfie.Presentation.Controllers;
 
 public class BoekenkastController : Controller
 {

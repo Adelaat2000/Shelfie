@@ -1,9 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Shelfie.Logic.Interfaces; // Nodig voor ISearchService
 using Shelfie.Presentation.Models; // Nodig voor de ViewModels
-using System;
 using System.Collections.Generic;
 using System.Linq;
+
+namespace Shelfie.Presentation.Controllers;
 
 public class SearchController : Controller
 {

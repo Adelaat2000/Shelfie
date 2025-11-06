@@ -1,5 +1,4 @@
 using Shelfie.Logic.Interfaces;
-using Shelfie.Logic.Models;
 using Shelfie.Logic.Services;
 using Shelfie.Dal;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -14,7 +13,7 @@ builder.Services.AddScoped<IGebruikerRepository>(_ => new GebruikerRepository(co
 builder.Services.AddScoped<IBoekRepository>(_ => new BoekRepository(connectionString));
 
 // Services
-builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddScoped<AccountService>();
 builder.Services.AddScoped<IBoekenkastService, BoekenkastService>();
 builder.Services.AddScoped<ISearchService, SearchService>();
 

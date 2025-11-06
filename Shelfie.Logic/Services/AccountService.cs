@@ -1,8 +1,11 @@
 using Shelfie.Logic.Interfaces;
 using Shelfie.Logic.Models;
-using Shelfie.Logic.Services;
+using Shelfie.Logic.DTOs;
+using Shelfie.Logic.Mappers;
 
-public class AccountService : IAccountService
+namespace Shelfie.Logic.Services;
+
+public class AccountService
 {
     private readonly IGebruikerRepository _gebruikerRepo;
 
@@ -11,7 +14,6 @@ public class AccountService : IAccountService
         _gebruikerRepo = gebruikerRepo;
     }
     public bool RegisterUser(string gebruikersnaam, string email, string wachtwoord)
-    
     {
         // Business Logic (Validatie)
         if (_gebruikerRepo.GetByEmail(email) != null)
@@ -32,10 +34,10 @@ public class AccountService : IAccountService
         };
 
         _gebruikerRepo.AddUser(nieuweGebruiker);
-        
+
         return true;
     }
-    public Gebruiker ValidateUser(string gebruikersnaam, string wachtwoord)
+    public GebruikerDto ValidateUser(string gebruikersnaam, string wachtwoord)
     {
         var gebruiker = _gebruikerRepo.GetByUsername(gebruikersnaam);
 
@@ -43,23 +45,12 @@ public class AccountService : IAccountService
         {
             return null;
         }
-        
+
         if (gebruiker.WachtwoordHash == wachtwoord)
         {
-            return gebruiker;
+            return gebruiker.ToDto();
         }
 
         return null;
-    }
-
-    public bool UpdateProfile(int gebruikerId, string persoonlijkeInfo)
-    {
-        var tempGebruiker = new Gebruiker { 
-            GebruikerID = gebruikerId, 
-            PersoonlijkeInfo = persoonlijkeInfo 
-        };
-
-        _gebruikerRepo.UpdateProfile(tempGebruiker);
-        return true;
     }
 }

@@ -1,10 +1,11 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Shelfie.Presentation.Models;
-
-public class LoginViewModel
+namespace Shelfie.Presentation.Models
 {
-    [Display(Name = "Gebruikersnaam")]
-    public string GebruikersNaam { get; set; }
-    public string Wachtwoord { get; set; }
+    public class LoginViewModel
+    {
+        [Display(Name = "Gebruikersnaam")]
+        public string GebruikersNaam { get; set; }
+        public string Wachtwoord { get; set; }
+    }
 }

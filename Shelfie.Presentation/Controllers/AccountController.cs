@@ -1,16 +1,18 @@
-using Microsoft.AspNetCore.Mvc;
-using Shelfie.Logic.Interfaces;
-using Shelfie.Presentation.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using System.Security.Claims;
+using Microsoft.AspNetCore.Mvc;
+using Shelfie.Logic.DTOs;
 using Shelfie.Logic.Services;
+using Shelfie.Presentation.Models;
+using System.Security.Claims;
+
+namespace Shelfie.Presentation.Controllers;
 
 public class AccountController : Controller
 {
-    private readonly IAccountService _accountService;
+    private readonly AccountService _accountService;
 
-    public AccountController(IAccountService accountService)
+    public AccountController(AccountService accountService)
     {
         _accountService = accountService;
     }
@@ -55,7 +57,7 @@ public class AccountController : Controller
         var claims = new List<Claim>
         {
             new Claim(ClaimTypes.Name, gebruiker.GebruikersNaam),
-            new Claim("GebruikerID", gebruiker.GebruikerID.ToString())
+            new Claim("GebruikerID", gebruiker.GebruikerId.ToString())
         };
 
         var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
