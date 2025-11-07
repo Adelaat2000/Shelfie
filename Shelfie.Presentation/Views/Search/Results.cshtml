@@ -1,0 +1,36 @@
+@model Shelfie.Presentation.Models.SearchViewModel
+
+@{
+    ViewData["Title"] = "Zoekresultaten";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+    <h4>U zocht op: "@Model.SearchTerm" (Type: @Model.SearchType)</h4>
+    <hr />
+
+@if (Model.Resultaten.Count == 0)
+{
+        <p>Geen boeken gevonden die voldoen aan de zoekopdracht.</p>
+}
+else
+{
+        <table class="table">
+        <thead>
+        <tr>
+        <th>Titel</th>
+        <th>ISBN</th>
+        <th>Auteur (Placeholder)</th>
+        </tr>
+        </thead>
+        <tbody>
+    @foreach (var boek in Model.Resultaten)
+    {
+        <tr>
+            <td>@boek.Titel</td>
+            <td>@boek.ISBN</td>
+            </tr>
+    }
+    </tbody>
+        </table>
+}
