@@ -1,0 +1,41 @@
+/Shelfie.sln
+###############
+# BUILD OUTPUT
+###############
+bin/
+obj/
+
+################
+# RIDER / JETBRAINS
+################
+.idea/
+*.sln.iml
+
+###############
+# VISUAL STUDIO
+###############
+*.user
+*.userosscache
+*.suo
+*.cache
+*.pdb
+*.dbmdl
+*.swp
+*.pidb
+*.tmp
+*.csproj.user
+
+###############
+# MACOS
+###############
+.DS_Store
+
+###############
+# LOG FILES
+###############
+*.log
+
+###############
+# OTHER
+###############
+Thumbs.db
