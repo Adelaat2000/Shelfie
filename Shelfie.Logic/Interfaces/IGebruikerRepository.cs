@@ -1,11 +1,11 @@
-using Shelfie.Logic.Models;
+using Shelfie.Logic.DTOs;
 
-namespace Shelfie.Logic.Interfaces;
-
-public interface IGebruikerRepository
+namespace Shelfie.Logic.Interfaces
 {
-    Gebruiker GetByEmail(string email);
-    Gebruiker GetByUsername(string username);
-    void AddUser(Gebruiker gebruiker);
-
+    public interface IGebruikerRepository
+    {
+        GebruikerDto? GetByEmail(string email);
+        GebruikerDto? GetByUsername(string username);
+        void AddUser(GebruikerDto gebruiker);
+    }
 }

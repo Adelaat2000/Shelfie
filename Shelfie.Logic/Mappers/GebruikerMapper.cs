@@ -1,15 +1,21 @@
 using Shelfie.Logic.DTOs;
 using Shelfie.Logic.Models;
 
-namespace Shelfie.Logic.Mappers;
-
-public static class GebruikerMapper
+namespace Shelfie.Logic.Mappers
 {
-    public static GebruikerDto ToDto(this Gebruiker gebruiker)
+    public class GebruikerMapper
     {
-        return new GebruikerDto(
-            gebruiker.GebruikerID,
-            gebruiker.GebruikersNaam,
-            gebruiker.Email);
+        public Gebruiker ToDomain(GebruikerDto dto)
+        {
+            return new Gebruiker(
+                dto.GebruikerId,
+                dto.GebruikersNaam,
+                dto.Email,
+                dto.WachtwoordHash,
+                dto.PersoonlijkeInfo,
+                dto.BannerURL,
+                dto.IcoonURL
+            );
+        }
     }
 }

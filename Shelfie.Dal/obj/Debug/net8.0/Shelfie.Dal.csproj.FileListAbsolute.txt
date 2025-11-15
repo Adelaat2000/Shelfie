@@ -29,3 +29,4 @@
 /Users/alexander/RiderProjects/alexander-de-laat/Individuele_projecten/Shelfie/Shelfie.Dal/obj/Debug/net8.0/Shelfie.Dal.pdb
 /Users/alexander/RiderProjects/alexander-de-laat/Individuele_projecten/Shelfie/Shelfie.Dal/obj/Debug/net8.0/Shelfie.Dal.genruntimeconfig.cache
 /Users/alexander/RiderProjects/alexander-de-laat/Individuele_projecten/Shelfie/Shelfie.Dal/obj/Debug/net8.0/ref/Shelfie.Dal.dll
+/Users/alexander/RiderProjects/alexander-de-laat/Individuele_projecten/Shelfie/Shelfie.Dal/obj/Debug/net8.0/Shelfie.Dal.sourcelink.json

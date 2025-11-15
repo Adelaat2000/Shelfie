@@ -294,3 +294,4 @@
 /Users/alexander/RiderProjects/alexander-de-laat/Individuele_projecten/Shelfie/Shelfie.Presentation/obj/Debug/net8.0/Shelfie.Presentation.pdb
 /Users/alexander/RiderProjects/alexander-de-laat/Individuele_projecten/Shelfie/Shelfie.Presentation/obj/Debug/net8.0/Shelfie.Presentation.genruntimeconfig.cache
 /Users/alexander/RiderProjects/alexander-de-laat/Individuele_projecten/Shelfie/Shelfie.Presentation/obj/Debug/net8.0/ref/Shelfie.Presentation.dll
+/Users/alexander/RiderProjects/alexander-de-laat/Individuele_projecten/Shelfie/Shelfie.Presentation/obj/Debug/net8.0/Shelfie.Presentation.sourcelink.json

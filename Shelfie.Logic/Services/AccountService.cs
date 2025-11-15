@@ -1,56 +1,55 @@
 using Shelfie.Logic.Interfaces;
-using Shelfie.Logic.Models;
 using Shelfie.Logic.DTOs;
 using Shelfie.Logic.Mappers;
+using Shelfie.Logic.Models;
 
 namespace Shelfie.Logic.Services;
 
 public class AccountService
 {
-    private readonly IGebruikerRepository _gebruikerRepo;
+    private readonly IGebruikerRepository _repo;
+    private readonly GebruikerMapper _mapper = new();
 
-    public AccountService(IGebruikerRepository gebruikerRepo)
+    public AccountService(IGebruikerRepository repo)
     {
-        _gebruikerRepo = gebruikerRepo;
+        _repo = repo;
     }
+
     public bool RegisterUser(string gebruikersnaam, string email, string wachtwoord)
     {
-        //Logica
-        if (_gebruikerRepo.GetByEmail(email) != null)
-        {
+        if (_repo.GetByEmail(email) != null)
             return false;
-        }
-        
-        var wachtwoordHash = wachtwoord;
 
-        var nieuweGebruiker = new Gebruiker
-        {
-            GebruikersNaam = gebruikersnaam,
-            Email = email,
-            WachtwoordHash = wachtwoordHash,
-            PersoonlijkeInfo = null,
-            BannerURL = null,
-            IcoonURL = null
-        };
+        var dto = new GebruikerDto(
+            0,
+            gebruikersnaam,
+            email,
+            wachtwoord,
+            null,
+            null,
+            null
+        );
 
-        _gebruikerRepo.AddUser(nieuweGebruiker);
-
+        _repo.AddUser(dto);
         return true;
     }
-    public GebruikerDto ValidateUser(string gebruikersnaam, string wachtwoord)
+
+    public GebruikerDto? ValidateUser(string gebruikersnaam, string wachtwoord)
     {
-        var gebruiker = _gebruikerRepo.GetByUsername(gebruikersnaam);
+        var dto = _repo.GetByUsername(gebruikersnaam);
 
-        if (gebruiker == null)
-        {
+        if (dto == null)
             return null;
-        }
 
-        if (gebruiker.WachtwoordHash == wachtwoord)
-        {
-            return gebruiker.ToDto();
-        }
+        if (dto.WachtwoordHash == wachtwoord)
+            return dto;
 
         return null;
+    }
+
+    public Gebruiker? GetDomainUser(string email)
+    {
+        var dto = _repo.GetByEmail(email);
+        return dto == null ? null : _mapper.ToDomain(dto);
     }
 }

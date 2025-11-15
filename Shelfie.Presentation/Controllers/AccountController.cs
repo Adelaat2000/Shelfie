@@ -17,7 +17,6 @@ public class AccountController : Controller
         _accountService = accountService;
     }
 
-    // registreren
     [HttpGet]
     public IActionResult Register() => View(new RegisterViewModel());
 
@@ -38,7 +37,6 @@ public class AccountController : Controller
         return RedirectToAction("Index", "Home");
     }
 
-    // inloggen
     [HttpGet]
     public IActionResult Login() => View(new LoginViewModel());
 

@@ -1,90 +1,83 @@
 using Shelfie.Logic.Interfaces;
-using Shelfie.Logic.Models;
+using Shelfie.Logic.DTOs;
 using Microsoft.Data.SqlClient;
-using System;
 
 namespace Shelfie.Dal;
+
 public class GebruikerRepository : IGebruikerRepository
 {
     private readonly string _connectionString;
+
     public GebruikerRepository(string connectionString)
     {
         _connectionString = connectionString;
     }
-    public Gebruiker GetByEmail(string email)
-    {
-        using (var connection = new SqlConnection(_connectionString))
-        {
-            var sql = "SELECT * FROM Gebruiker WHERE Email = @Email";
-            using (var command = new SqlCommand(sql, connection))
-            {
-                command.Parameters.AddWithValue("@Email", email);
-                connection.Open();
-                using (var reader = command.ExecuteReader())
-                {
-                    if (reader.Read())
-                    {
-                        return MapGebruiker(reader);
-                    }
-                }
-            }
-        }
-        return null; // Geen gebruiker gevonden
-    }
-    public Gebruiker GetByUsername(string username)
-    {
-        using (var connection = new SqlConnection(_connectionString))
-        {
-            var sql = "SELECT * FROM Gebruiker WHERE Gebruikersnaam = @Gebruikersnaam";
-            using (var command = new SqlCommand(sql, connection))
-            {
-                command.Parameters.AddWithValue("@Gebruikersnaam", username);
-                connection.Open();
-                using (var reader = command.ExecuteReader())
-                {
-                    if (reader.Read())
-                    {
-                        return MapGebruiker(reader);
-                    }
-                }
-            }
-        }
-        return null; // Geen gebruiker gevonden
-    }
-    public void AddUser(Gebruiker gebruiker)
-    {
-        using (var connection = new SqlConnection(_connectionString))
-        {
-            var sql = @"INSERT INTO Gebruiker 
-                            (Gebruikersnaam, Email, WachtwoordHash, PersoonlijkeInfo, BannerURL, IcoonURL) 
-                        VALUES 
-                            (@Gebruikersnaam, @Email, @WachtwoordHash, @PersoonlijkeInfo, @BannerURL, @IcoonURL)";
-            
-            using (var command = new SqlCommand(sql, connection))
-            {
-                command.Parameters.AddWithValue("@Gebruikersnaam", gebruiker.GebruikersNaam);
-                command.Parameters.AddWithValue("@Email", gebruiker.Email);
-                command.Parameters.AddWithValue("@WachtwoordHash", gebruiker.WachtwoordHash);
-                command.Parameters.AddWithValue("@PersoonlijkeInfo", (object)gebruiker.PersoonlijkeInfo ?? DBNull.Value);
-                command.Parameters.AddWithValue("@BannerURL", (object)gebruiker.BannerURL ?? DBNull.Value);
-                command.Parameters.AddWithValue("@IcoonURL", (object)gebruiker.IcoonURL ?? DBNull.Value);
 
-                connection.Open();
-                command.ExecuteNonQuery();
-            }
-        }
-    }
-    private Gebruiker MapGebruiker(SqlDataReader reader)
+    public GebruikerDto? GetByEmail(string email)
     {
-        return new Gebruiker
-        {
-            GebruikerID = (int)reader["GebruikerID"],
-            GebruikersNaam = reader["Gebruikersnaam"].ToString(),
-            Email = reader["Email"].ToString(),
-            WachtwoordHash = reader["WachtwoordHash"].ToString(),
-            PersoonlijkeInfo = reader["PersoonlijkeInfo"] != DBNull.Value ? reader["PersoonlijkeInfo"].ToString() : null,
-            BannerURL = reader["BannerURL"] != DBNull.Value ? reader["BannerURL"].ToString() : null,
-            IcoonURL = reader["IcoonURL"] != DBNull.Value ? reader["IcoonURL"].ToString() : null
-        };
+        using var connection = new SqlConnection(_connectionString);
+        const string sql = "SELECT * FROM Gebruiker WHERE Email = @Email";
+
+        using var command = new SqlCommand(sql, connection);
+        command.Parameters.AddWithValue("@Email", email);
+
+        connection.Open();
+        using var reader = command.ExecuteReader();
+
+        if (!reader.Read())
+            return null;
+
+        return MapDto(reader);
+    }
+
+    public GebruikerDto? GetByUsername(string username)
+    {
+        using var connection = new SqlConnection(_connectionString);
+        const string sql = "SELECT * FROM Gebruiker WHERE Gebruikersnaam = @Gebruikersnaam";
+
+        using var command = new SqlCommand(sql, connection);
+        command.Parameters.AddWithValue("@Gebruikersnaam", username);
+
+        connection.Open();
+        using var reader = command.ExecuteReader();
+
+        if (!reader.Read())
+            return null;
+
+        return MapDto(reader);
+    }
+
+    public void AddUser(GebruikerDto gebruiker)
+    {
+        using var connection = new SqlConnection(_connectionString);
+        const string sql = @"
+            INSERT INTO Gebruiker 
+            (Gebruikersnaam, Email, WachtwoordHash, PersoonlijkeInfo, BannerURL, IcoonURL)
+            VALUES 
+            (@Gebruikersnaam, @Email, @WachtwoordHash, @PersoonlijkeInfo, @BannerURL, @IcoonURL)";
+
+        using var command = new SqlCommand(sql, connection);
+        command.Parameters.AddWithValue("@Gebruikersnaam", gebruiker.GebruikersNaam);
+        command.Parameters.AddWithValue("@Email", gebruiker.Email);
+        command.Parameters.AddWithValue("@WachtwoordHash", gebruiker.WachtwoordHash);
+        command.Parameters.AddWithValue("@PersoonlijkeInfo", (object)gebruiker.PersoonlijkeInfo ?? DBNull.Value);
+        command.Parameters.AddWithValue("@BannerURL", (object)gebruiker.BannerURL ?? DBNull.Value);
+        command.Parameters.AddWithValue("@IcoonURL", (object)gebruiker.IcoonURL ?? DBNull.Value);
+
+        connection.Open();
+        command.ExecuteNonQuery();
+    }
+
+    private GebruikerDto MapDto(SqlDataReader reader)
+    {
+        return new GebruikerDto(
+            (int)reader["GebruikerID"],
+            reader["GebruikersNaam"].ToString(),
+            reader["Email"].ToString(),
+            reader["WachtwoordHash"].ToString(),
+            reader["PersoonlijkeInfo"] == DBNull.Value ? null : reader["PersoonlijkeInfo"].ToString(),
+            reader["BannerURL"] == DBNull.Value ? null : reader["BannerURL"].ToString(),
+            reader["IcoonURL"] == DBNull.Value ? null : reader["IcoonURL"].ToString()
+        );
     }
 }
