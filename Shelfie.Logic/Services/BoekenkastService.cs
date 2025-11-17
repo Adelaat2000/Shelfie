@@ -1,6 +1,7 @@
 using Shelfie.Logic.Interfaces;
 using Shelfie.Logic.Models;
 using System.Collections.Generic;
+using Shelfie.Contract.Interfaces;
 
 namespace Shelfie.Logic.Services;
 

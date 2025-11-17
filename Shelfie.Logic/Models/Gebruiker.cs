@@ -21,6 +21,15 @@ namespace Shelfie.Logic.Models
             string bannerURL,
             string icoonURL)
         {
+            if (string.IsNullOrWhiteSpace(gebruikersNaam))
+                throw new ArgumentNullException("Vul gebruikersnaam in",nameof(gebruikersNaam));
+
+            if (string.IsNullOrWhiteSpace(email))
+                throw new ArgumentNullException("Vul Email in", nameof(email));
+                    
+            if (string.IsNullOrWhiteSpace(wachtwoordHash))
+                throw new ArgumentNullException("Vul wachtwoord in",nameof(wachtwoordHash));
+            
             GebruikerID = gebruikerID;
             GebruikersNaam = gebruikersNaam;
             Email = email;

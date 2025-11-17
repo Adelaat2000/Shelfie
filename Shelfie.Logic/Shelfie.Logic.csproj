@@ -12,6 +12,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Shelfie.Contract\Shelfie.Contract.csproj" />
+      <ProjectReference Include="..\Shelfie.Dal\Shelfie.Dal.csproj" />
     </ItemGroup>
 
 </Project>

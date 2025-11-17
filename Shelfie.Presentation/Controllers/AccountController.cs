@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
-using Shelfie.Logic.DTOs;
+using Shelfie.Contract.DTO;
 using Shelfie.Logic.Services;
 using Shelfie.Presentation.Models;
 using System.Security.Claims;

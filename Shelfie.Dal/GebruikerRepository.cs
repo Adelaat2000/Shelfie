@@ -1,5 +1,5 @@
-using Shelfie.Logic.Interfaces;
-using Shelfie.Logic.DTOs;
+using Shelfie.Contract.Interfaces;
+using Shelfie.Contract.DTO;
 using Microsoft.Data.SqlClient;
 
 namespace Shelfie.Dal;
@@ -13,7 +13,7 @@ public class GebruikerRepository : IGebruikerRepository
         _connectionString = connectionString;
     }
 
-    public GebruikerDto? GetByEmail(string email)
+    public GebruikerDTO? GetByEmail(string email)
     {
         using var connection = new SqlConnection(_connectionString);
         const string sql = "SELECT * FROM Gebruiker WHERE Email = @Email";
@@ -30,7 +30,7 @@ public class GebruikerRepository : IGebruikerRepository
         return MapDto(reader);
     }
 
-    public GebruikerDto? GetByUsername(string username)
+    public GebruikerDTO? GetByUsername(string username)
     {
         using var connection = new SqlConnection(_connectionString);
         const string sql = "SELECT * FROM Gebruiker WHERE Gebruikersnaam = @Gebruikersnaam";
@@ -47,7 +47,7 @@ public class GebruikerRepository : IGebruikerRepository
         return MapDto(reader);
     }
 
-    public void AddUser(GebruikerDto gebruiker)
+    public void AddUser(GebruikerDTO? gebruiker)
     {
         using var connection = new SqlConnection(_connectionString);
         const string sql = @"
@@ -68,9 +68,9 @@ public class GebruikerRepository : IGebruikerRepository
         command.ExecuteNonQuery();
     }
 
-    private GebruikerDto MapDto(SqlDataReader reader)
+    private GebruikerDTO? MapDto(SqlDataReader reader)
     {
-        return new GebruikerDto(
+        return new GebruikerDTO(
             (int)reader["GebruikerID"],
             reader["GebruikersNaam"].ToString(),
             reader["Email"].ToString(),

@@ -1,11 +1,11 @@
-using Shelfie.Logic.DTOs;
+using Shelfie.Contract.DTO;
 using Shelfie.Logic.Models;
 
 namespace Shelfie.Logic.Mappers
 {
     public class GebruikerMapper
     {
-        public Gebruiker ToDomain(GebruikerDto dto)
+        public Gebruiker ToDomain(GebruikerDTO dto)
         {
             return new Gebruiker(
                 dto.GebruikerId,
