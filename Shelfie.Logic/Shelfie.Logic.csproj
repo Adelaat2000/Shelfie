@@ -10,4 +10,8 @@
       <PackageReference Include="MicrosoftEntityFramework" Version="1.0.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Shelfie.Contract\Shelfie.Contract.csproj" />
+    </ItemGroup>
+
 </Project>

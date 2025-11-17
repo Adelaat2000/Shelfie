@@ -4,6 +4,16 @@
     "net8.0": {
       "MicrosoftEntityFramework/1.0.0": {
         "type": "package"
+      },
+      "Shelfie.Contract/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/Shelfie.Contract.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Shelfie.Contract.dll": {}
+        }
       }
     }
   },
@@ -21,11 +31,17 @@
         "microsoftentityframework.nuspec",
         "qwe.bacpac"
       ]
+    },
+    "Shelfie.Contract/1.0.0": {
+      "type": "project",
+      "path": "../Shelfie.Contract/Shelfie.Contract.csproj",
+      "msbuildProject": "../Shelfie.Contract/Shelfie.Contract.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
-      "MicrosoftEntityFramework >= 1.0.0"
+      "MicrosoftEntityFramework >= 1.0.0",
+      "Shelfie.Contract >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -52,7 +68,11 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "/Users/alexander/RiderProjects/alexander-de-laat/Individuele_projecten/Shelfie/Shelfie.Contract/Shelfie.Contract.csproj": {
+              "projectPath": "/Users/alexander/RiderProjects/alexander-de-laat/Individuele_projecten/Shelfie/Shelfie.Contract/Shelfie.Contract.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
