@@ -4,6 +4,8 @@ using Shelfie.Dal;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Shelfie.Contract.Interfaces;
 using Shelfie.Logic.Mappers;
+using Shelfie.Logic.Services;
+using Shelfie.Presentation.Mappers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,8 +15,10 @@ builder.Services.AddScoped<IGebruikerRepository>(_ => new GebruikerRepository(co
 builder.Services.AddScoped<IBoekRepository>(_ => new BoekRepository(connectionString));
 builder.Services.AddScoped<AccountService>();
 builder.Services.AddScoped<GebruikerMapper>();
-builder.Services.AddScoped<IBoekenkastService, BoekenkastService>();
-builder.Services.AddScoped<ISearchService, SearchService>();
+builder.Services.AddScoped<BoekMapper>();
+builder.Services.AddScoped<BoekService>();
+builder.Services.AddScoped<PresentationMapper>();
+
 
 builder.Services
     .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

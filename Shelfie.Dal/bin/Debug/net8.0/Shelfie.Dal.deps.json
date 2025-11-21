@@ -11,7 +11,7 @@
           "Microsoft.EntityFrameworkCore": "8.0.21",
           "Microsoft.EntityFrameworkCore.SqlServer": "8.0.21",
           "Microsoft.EntityFrameworkCore.Tools": "8.0.21",
-          "Shelfie.Logic": "1.0.0"
+          "Shelfie.Contract": "1.0.0"
         },
         "runtime": {
           "Shelfie.Dal.dll": {}
@@ -647,7 +647,6 @@
           }
         }
       },
-      "MicrosoftEntityFramework/1.0.0": {},
       "Mono.TextTemplating/2.2.1": {
         "dependencies": {
           "System.CodeDom": "4.4.0"
@@ -926,12 +925,9 @@
           }
         }
       },
-      "Shelfie.Logic/1.0.0": {
-        "dependencies": {
-          "MicrosoftEntityFramework": "1.0.0"
-        },
+      "Shelfie.Contract/1.0.0": {
         "runtime": {
-          "Shelfie.Logic.dll": {
+          "Shelfie.Contract.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
@@ -1232,13 +1228,6 @@
       "path": "microsoft.win32.systemevents/6.0.0",
       "hashPath": "microsoft.win32.systemevents.6.0.0.nupkg.sha512"
     },
-    "MicrosoftEntityFramework/1.0.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-3bAlMPxzyqAsSjTt2CdjgjheZAH4RjkFEe0lrhUCaWh0i6BVofc7P37JSnQE4SYTMgCqzDyT7svp/k/tgOAW9g==",
-      "path": "microsoftentityframework/1.0.0",
-      "hashPath": "microsoftentityframework.1.0.0.nupkg.sha512"
-    },
     "Mono.TextTemplating/2.2.1": {
       "type": "package",
       "serviceable": true,
@@ -1484,7 +1473,7 @@
       "path": "system.windows.extensions/6.0.0",
       "hashPath": "system.windows.extensions.6.0.0.nupkg.sha512"
     },
-    "Shelfie.Logic/1.0.0": {
+    "Shelfie.Contract/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

@@ -21,7 +21,7 @@ public class AccountService
         if (_gebruikerRepository.GetByEmail(email) != null)
             return false;
 
-        var dto = new GebruikerDTO(
+        var domainGebruiker = new Gebruiker(
             0,
             gebruikersnaam,
             email,
@@ -31,11 +31,13 @@ public class AccountService
             null
         );
 
+
+        var dto = _gebruikerMapper.ToDto(domainGebruiker);
         _gebruikerRepository.AddUser(dto);
         return true;
     }
 
-    public GebruikerDTO? ValidateUser(string gebruikersnaam, string wachtwoord)
+    public Gebruiker? ValidateUser(string gebruikersnaam, string wachtwoord)
     {
         var dto = _gebruikerRepository.GetByUsername(gebruikersnaam);
 
@@ -43,9 +45,9 @@ public class AccountService
             return null;
 
         if (dto.WachtwoordHash == wachtwoord)
-            return dto;
+            return null;
 
-        return null;
+        return _gebruikerMapper.ToDomain(dto);
     }
 
     public Gebruiker? GetDomainUser(string email)

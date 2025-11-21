@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Shelfie.Dal")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2395cd9d8b3ee3c0525b4a46a399f4b3d8a1139d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+89628ade2ee4287110c053b33e16999cd3cba410")]
 [assembly: System.Reflection.AssemblyProductAttribute("Shelfie.Dal")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Shelfie.Dal")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

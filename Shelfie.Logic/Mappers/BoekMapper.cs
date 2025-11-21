@@ -1,24 +1,29 @@
 using Shelfie.Contract.DTO;
+using Shelfie.Contract.InputDTO;
+using Shelfie.Contract.OutputDTO;
 using Shelfie.Logic.Models;
     
 namespace Shelfie.Logic.Mappers;
 
 public class BoekMapper
 {
-    private readonly AuteurMapper _auteurMapper;
-    public BoekMapper()
+    public Boek ToDomain(BoekInputDTO dto)
     {
-        _auteurMapper = new AuteurMapper();
+        return new Boek(0, dto.ISBN, dto.Titel );
     }
-    
+
     public Boek ToDomain(BoekDTO dto)
     {
-        return new Boek(
-            dto.Titel,
-            dto.ISBN, 
-            dto.Auteurs
-            .Select(a => _auteurMapper.ToDomain(a))
-            .ToList(),
-            dto.Genres);
+        return new Boek(dto.BoekID, dto.ISBN, dto.Titel);
+    }
+
+    public BoekOutputDTO ToOutput(Boek boek)
+    {
+        return new BoekOutputDTO
+        {
+            ISBN = boek.ISBN,
+            Titel = boek.Titel,
+            AuteurNaam = boek.Auteurs.Select(a => a.AuteurNaam).ToList()
+        };
     }
 }

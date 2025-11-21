@@ -1,9 +1,8 @@
 namespace Shelfie.Contract.DTO;
 
     public record BoekDTO(
-        int BoekId,
+        int BoekID,
         string ISBN,
         string Titel,
-        List<AuteurDTO> Auteurs,
-        List<GenreDTO> Genres
+        List<AuteurDTO> Auteurs
     );

@@ -8,18 +8,12 @@ namespace Shelfie.Logic.Models
         public int BoekID { get; set; }
         public string ISBN { get; set; }
         public string Titel { get; set; }
-        public List<Auteur> Auteurs { get; set; }
-        public List<Genre> Genres { get; set; }
-
-        public Boek(string titel, string isbn, List<Auteur> auteurs, List<GenreDTO> genres)
+        public List<Auteur> Auteurs { get; } = new();
+        public Boek(int boekID, string isbn, string titel)
         {
-            Titel = titel;
+            BoekID = boekID;
             ISBN = isbn;
-            Auteur = auteurs;
-            Genre = genres;
+            Titel = titel;
         }
-
-        public List<Auteur> Auteur { get; set; }
-        public List<Genre> Genre { get; set; }
     }
 }

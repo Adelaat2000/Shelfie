@@ -17,5 +17,18 @@ namespace Shelfie.Logic.Mappers
                 dto.IcoonURL
             );
         }
+
+        public GebruikerDTO ToDto(Gebruiker domain)
+        {
+            return new GebruikerDTO(
+                domain.GebruikerID,
+                domain.GebruikersNaam,
+                domain.Email,
+                domain.WachtwoordHash,
+                domain.PersoonlijkeInfo,
+                domain.BannerURL,
+                domain.IcoonURL
+            );
+        }
     }
 }

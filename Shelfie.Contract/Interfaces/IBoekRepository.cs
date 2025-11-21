@@ -3,10 +3,11 @@ using Shelfie.Contract.DTO;
 namespace Shelfie.Contract.Interfaces
 {
     public interface IBoekRepository
-    {
-        BoekDTO? GetBoekByEmail(string email);
-        BoekDTO? GetBoekByTitel(string titel);
-        BoekDTO? GetBoekByISBN(string isbn);
-        void addBoek(BoekDTO boek);
+    { 
+        void Create(BoekDTO boek);
+        BoekDTO? GetByIsbn(string isbn);
+        List<BoekDTO> GetByTitel(string titel);
+        void Update(BoekDTO boek);
+        void Delete(BoekDTO boek);
     }
 }

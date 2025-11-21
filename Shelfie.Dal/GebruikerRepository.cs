@@ -60,12 +60,17 @@ public class GebruikerRepository : IGebruikerRepository
         command.Parameters.AddWithValue("@Gebruikersnaam", gebruiker.GebruikersNaam);
         command.Parameters.AddWithValue("@Email", gebruiker.Email);
         command.Parameters.AddWithValue("@WachtwoordHash", gebruiker.WachtwoordHash);
-        command.Parameters.AddWithValue("@PersoonlijkeInfo", (object)gebruiker.PersoonlijkeInfo ?? DBNull.Value);
-        command.Parameters.AddWithValue("@BannerURL", (object)gebruiker.BannerURL ?? DBNull.Value);
-        command.Parameters.AddWithValue("@IcoonURL", (object)gebruiker.IcoonURL ?? DBNull.Value);
+        command.Parameters.AddWithValue("@PersoonlijkeInfo", (object?)gebruiker.PersoonlijkeInfo ?? DBNull.Value);
+        command.Parameters.AddWithValue("@BannerURL", (object?)gebruiker.BannerURL ?? DBNull.Value);
+        command.Parameters.AddWithValue("@IcoonURL", (object?)gebruiker.IcoonURL ?? DBNull.Value);
 
         connection.Open();
         command.ExecuteNonQuery();
+    }
+
+    public void Delete(int gebruikerId)
+    {
+        throw new NotImplementedException();
     }
 
     private GebruikerDTO? MapDto(SqlDataReader reader)
