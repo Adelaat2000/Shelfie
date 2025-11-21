@@ -894,11 +894,19 @@
           }
         }
       },
+      "Shelfie.Contract/1.0.0": {
+        "runtime": {
+          "Shelfie.Contract.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
       "Shelfie.Dal/1.0.0": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "8.0.21",
           "Microsoft.EntityFrameworkCore.SqlServer": "8.0.21",
-          "Shelfie.Logic": "1.0.0"
+          "Shelfie.Contract": "1.0.0"
         },
         "runtime": {
           "Shelfie.Dal.dll": {
@@ -909,7 +917,9 @@
       },
       "Shelfie.Logic/1.0.0": {
         "dependencies": {
-          "MicrosoftEntityFramework": "1.0.0"
+          "MicrosoftEntityFramework": "1.0.0",
+          "Shelfie.Contract": "1.0.0",
+          "Shelfie.Dal": "1.0.0"
         },
         "runtime": {
           "Shelfie.Logic.dll": {
@@ -1457,6 +1467,11 @@
       "sha512": "sha512-IXoJOXIqc39AIe+CIR7koBtRGMiCt/LPM3lI+PELtDIy9XdyeSrwXFdWV9dzJ2Awl0paLWUaknLxFQ5HpHZUog==",
       "path": "system.windows.extensions/6.0.0",
       "hashPath": "system.windows.extensions.6.0.0.nupkg.sha512"
+    },
+    "Shelfie.Contract/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "Shelfie.Dal/1.0.0": {
       "type": "project",

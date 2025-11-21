@@ -1,20 +1,23 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
-using Shelfie.Logic.DTOs;
+using Shelfie.Contract.DTO;
 using Shelfie.Logic.Services;
 using Shelfie.Presentation.Models;
 using System.Security.Claims;
+using Shelfie.Presentation.Mappers;
 
 namespace Shelfie.Presentation.Controllers;
 
 public class AccountController : Controller
 {
     private readonly AccountService _accountService;
+    private readonly PresentationMapper _presentationMapper;
 
-    public AccountController(AccountService accountService)
+    public AccountController(AccountService accountService, PresentationMapper presentationMapper)
     {
         _accountService = accountService;
+        _presentationMapper = presentationMapper;
     }
 
     [HttpGet]
@@ -51,11 +54,11 @@ public class AccountController : Controller
             ModelState.AddModelError("", "Ongeldige inloggegevens.");
             return View(vm);
         }
-
+        var gebruikerViewModel = _presentationMapper.ToViewModel(gebruiker);
         var claims = new List<Claim>
         {
-            new Claim(ClaimTypes.Name, gebruiker.GebruikersNaam),
-            new Claim("GebruikerID", gebruiker.GebruikerId.ToString())
+            new Claim(ClaimTypes.Name, gebruikerViewModel.GebruikersNaam),
+            new Claim("GebruikerID", gebruikerViewModel.GebruikerID.ToString())
         };
 
         var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);

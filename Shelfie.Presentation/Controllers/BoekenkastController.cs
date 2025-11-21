@@ -13,18 +13,17 @@ public class BoekenkastController : Controller
     {
         _boekenkastService = boekenkastService;
     }
-    [HttpGet]
-    public IActionResult Index()
-    {
-        // Tijdelije placeholder
-        int currentUserId = 1; 
-        List<Shelfie.Logic.Models.Boek> boekenLijst = _boekenkastService.GetBoekenkastForUser(currentUserId);
-        List<BoekViewModel> viewModels = boekenLijst.Select(boek => new BoekViewModel
-        {
-            BoekID = boek.BoekID,
-            Titel = boek.Titel,
-            ISBN = boek.ISBN
-        }).ToList();
-        return View(viewModels);
+    //[HttpGet]
+   // public IActionResult Index()
+   // {
+       // int currentUserId = 1; 
+        //List<Shelfie.Logic.Models.Boek> boekenLijst = _boekenkastService.GetBoekenkastForUser(currentUserId);
+        //List<BoekViewModel> viewModels = boekenLijst.Select(boek => new BoekViewModel
+        //{
+         //   BoekID = boek.BoekID,
+         //   Titel = boek.Titel,
+         //   ISBN = boek.ISBN
+        //}).ToList();
+       // return View(viewModels);
     }
-}
+//}

@@ -1,127 +1,76 @@
-using Shelfie.Logic.Interfaces;
-using Shelfie.Logic.Models;
 using Microsoft.Data.SqlClient;
+using Shelfie.Contract.DTO;
+using Shelfie.Contract.Interfaces;
 
 namespace Shelfie.Dal;
+
 public class BoekRepository : IBoekRepository
 {
     private readonly string _connectionString;
-
-    // Constructor connectie string ontvangen
     public BoekRepository(string connectionString)
     {
         _connectionString = connectionString;
     }
-    public List<Boek> GetBoekenVoorGebruiker(int gebruikerId)
-    {
-        var boeken = new List<Boek>();
-        using (var connection = new SqlConnection(_connectionString))
-        {
-            var sql = @"SELECT B.BoekID, B.ISBN, B.Titel
-                        FROM Boek B
-                        INNER JOIN BoekCollectie BC ON B.BoekID = BC.BoekID
-                        INNER JOIN Gebruiker G ON BC.GebruikerID = G.GebruikerID
-                        WHERE G.GebruikerID = @GebruikerID
-                        ORDER BY BC.Volgorde";
-            
-            using (var command = new SqlCommand(sql, connection))
-            {
-                command.Parameters.AddWithValue("@GebruikerID", gebruikerId);
 
-                connection.Open();
-                using (var reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        boeken.Add(MapBoek(reader));
-                    }
-                }
-            }
-        }
-        return boeken; 
-    }
-    public List<Boek> SearchByTitel(string searchTerm)
+    public void Create(BoekDTO boek)
     {
-        var boeken = new List<Boek>(); 
-        using (var connection = new SqlConnection(_connectionString))
+        const string InsertSql =
+            @"INSERT INTO Boeken (ISBN, Titel) VALUES (@ISBN, @Titel);";
+
+        using var conn = new SqlConnection(_connectionString);
+        using var cmd = new  SqlCommand(InsertSql, conn);
+        
+        cmd.Parameters.AddWithValue("@ISBN", boek.ISBN);
+        cmd.Parameters.AddWithValue("@Titel", boek.Titel);
+        
+        conn.Open();
+        cmd.ExecuteNonQuery();        
+    }
+
+    public BoekDTO? GetByIsbn(string isbn)
+    {
+        const string sql = @"SELECT BoekID, ISBN, Titel FROM Boeken WHERE ISBN =@ISBN";
+        using var conn = new SqlConnection(_connectionString);
+        using var cmd = new SqlCommand(sql, conn);
+        cmd.Parameters.AddWithValue("@ISBN", isbn);
+
+        conn.Open();
+        using var reader = cmd.ExecuteReader();
+
+        if (!reader.Read())
+            return null;
+
+        return new BoekDTO(
+            reader.GetInt32(0),
+            reader.GetString(1),
+            reader.GetString(2),
+            new List<AuteurDTO>()
+        );
+    }
+
+    public List<BoekDTO> GetByTitel(string titel)
+    {
+        const string sql = @"SELECT BoekID, ISBN, TITEL FROM BOEKEN WHERE Titel =@Titel";
+        using var conn = new SqlConnection(_connectionString);
+        using var cmd = new SqlCommand(sql, conn);
+        cmd.Parameters.AddWithValue("@Titel", titel);
+
+        conn.Open();
+        using var reader = cmd.ExecuteReader();
+
+        var Boeken = new List<BoekDTO>();
+
+        while (reader.Read())
         {
-            var sql = "SELECT * FROM Boek WHERE Titel LIKE @SearchTerm";
-            using (var command = new SqlCommand(sql, connection))
-            {
-                command.Parameters.AddWithValue("@SearchTerm", "%" + searchTerm + "%");
-                connection.Open();
-                using (var reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        boeken.Add(MapBoek(reader));
-                    }
-                }
-            }
+            Boeken.Add(new BoekDTO(
+                reader.GetInt32(0),
+                reader.GetString(1),
+                reader.GetString(2),
+                new List<AuteurDTO>()
+            ));
         }
-        return boeken; 
+        return Boeken;
     }
     
-    public List<Boek> SearchByAuteur(string searchTerm)
-    {
-        var boeken = new List<Boek>();
-        using (var connection = new SqlConnection(_connectionString))
-        {
-            var sql = @"SELECT B.BoekID, B.ISBN, B.Titel 
-                        FROM Boek B
-                        INNER JOIN BoekAuteur BA ON B.BoekID = BA.BoekID
-                        INNER JOIN Auteur A ON BA.AuteurID = A.AuteurID
-                        WHERE A.AuteurNaam LIKE @SearchTerm";
-            
-            using (var command = new SqlCommand(sql, connection))
-            {
-                command.Parameters.AddWithValue("@SearchTerm", "%" + searchTerm + "%");
-                connection.Open();
-                using (var reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        boeken.Add(MapBoek(reader));
-                    }
-                }
-            }
-        }
-        return boeken; 
-    }
-    
-    public List<Boek> SearchByGenre(string searchTerm)
-    {
-        var boeken = new List<Boek>();
-        using (var connection = new SqlConnection(_connectionString))
-        {
-            var sql = @"SELECT B.BoekID, B.ISBN, B.Titel 
-                        FROM Boek B
-                        INNER JOIN BoekGenre BG ON B.BoekID = BG.BoekID
-                        INNER JOIN Genre G ON BG.GenreID = G.GenreID
-                        WHERE G.GenreNaam LIKE @SearchTerm";
-            
-            using (var command = new SqlCommand(sql, connection))
-            {
-                command.Parameters.AddWithValue("@SearchTerm", "%" + searchTerm + "%");
-                connection.Open();
-                using (var reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        boeken.Add(MapBoek(reader));
-                    }
-                }
-            }
-        }
-        return boeken; 
-    }
-    private Boek MapBoek(SqlDataReader reader)
-    {
-        return new Boek
-        {
-            BoekID = (int)reader["BoekID"],
-            Titel = reader["Titel"].ToString(),
-            ISBN = reader["ISBN"].ToString()
-        };
-    }
+    public void UpdateBoek(BoekDTO boek)
 }

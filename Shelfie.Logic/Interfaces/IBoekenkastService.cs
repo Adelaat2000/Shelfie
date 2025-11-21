@@ -5,5 +5,5 @@ namespace Shelfie.Logic.Interfaces;
 
 public interface IBoekenkastService
 {
-    List<Boek> GetBoekenkastForUser(int gebruikerId);
+    //List<Boek> GetBoekenkastForUser(int gebruikerId);
 }

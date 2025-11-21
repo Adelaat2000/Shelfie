@@ -1,5 +1,5 @@
-using Shelfie.Logic.Interfaces;
-using Shelfie.Logic.DTOs;
+using Shelfie.Contract.Interfaces;
+using Shelfie.Contract.DTO;
 using Microsoft.Data.SqlClient;
 
 namespace Shelfie.Dal;
@@ -13,7 +13,7 @@ public class GebruikerRepository : IGebruikerRepository
         _connectionString = connectionString;
     }
 
-    public GebruikerDto? GetByEmail(string email)
+    public GebruikerDTO? GetByEmail(string email)
     {
         using var connection = new SqlConnection(_connectionString);
         const string sql = "SELECT * FROM Gebruiker WHERE Email = @Email";
@@ -30,7 +30,7 @@ public class GebruikerRepository : IGebruikerRepository
         return MapDto(reader);
     }
 
-    public GebruikerDto? GetByUsername(string username)
+    public GebruikerDTO? GetByUsername(string username)
     {
         using var connection = new SqlConnection(_connectionString);
         const string sql = "SELECT * FROM Gebruiker WHERE Gebruikersnaam = @Gebruikersnaam";
@@ -47,7 +47,7 @@ public class GebruikerRepository : IGebruikerRepository
         return MapDto(reader);
     }
 
-    public void AddUser(GebruikerDto gebruiker)
+    public void AddUser(GebruikerDTO? gebruiker)
     {
         using var connection = new SqlConnection(_connectionString);
         const string sql = @"
@@ -60,17 +60,22 @@ public class GebruikerRepository : IGebruikerRepository
         command.Parameters.AddWithValue("@Gebruikersnaam", gebruiker.GebruikersNaam);
         command.Parameters.AddWithValue("@Email", gebruiker.Email);
         command.Parameters.AddWithValue("@WachtwoordHash", gebruiker.WachtwoordHash);
-        command.Parameters.AddWithValue("@PersoonlijkeInfo", (object)gebruiker.PersoonlijkeInfo ?? DBNull.Value);
-        command.Parameters.AddWithValue("@BannerURL", (object)gebruiker.BannerURL ?? DBNull.Value);
-        command.Parameters.AddWithValue("@IcoonURL", (object)gebruiker.IcoonURL ?? DBNull.Value);
+        command.Parameters.AddWithValue("@PersoonlijkeInfo", (object?)gebruiker.PersoonlijkeInfo ?? DBNull.Value);
+        command.Parameters.AddWithValue("@BannerURL", (object?)gebruiker.BannerURL ?? DBNull.Value);
+        command.Parameters.AddWithValue("@IcoonURL", (object?)gebruiker.IcoonURL ?? DBNull.Value);
 
         connection.Open();
         command.ExecuteNonQuery();
     }
 
-    private GebruikerDto MapDto(SqlDataReader reader)
+    public void Delete(int gebruikerId)
     {
-        return new GebruikerDto(
+        throw new NotImplementedException();
+    }
+
+    private GebruikerDTO? MapDto(SqlDataReader reader)
+    {
+        return new GebruikerDTO(
             (int)reader["GebruikerID"],
             reader["GebruikersNaam"].ToString(),
             reader["Email"].ToString(),
