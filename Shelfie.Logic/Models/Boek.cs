@@ -9,11 +9,12 @@ namespace Shelfie.Logic.Models
         public string ISBN { get; set; }
         public string Titel { get; set; }
         public List<Auteur> Auteurs { get; } = new();
-        public Boek(int boekID, string isbn, string titel)
+        public Boek(int boekID, string isbn, string titel, List<Auteur> auteurs)
         {
             BoekID = boekID;
             ISBN = isbn;
             Titel = titel;
+            Auteurs = auteurs;
         }
     }
 }

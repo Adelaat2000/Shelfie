@@ -18,7 +18,8 @@ builder.Services.AddScoped<GebruikerMapper>();
 builder.Services.AddScoped<BoekMapper>();
 builder.Services.AddScoped<BoekService>();
 builder.Services.AddScoped<PresentationMapper>();
-
+builder.Services.AddScoped<AuteurMapper>();
+builder.Services.AddScoped<BoekViewModelMapper>();
 
 builder.Services
     .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

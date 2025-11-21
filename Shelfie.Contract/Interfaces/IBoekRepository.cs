@@ -4,10 +4,10 @@ namespace Shelfie.Contract.Interfaces
 {
     public interface IBoekRepository
     { 
-        void Create(BoekDTO boek);
         BoekDTO? GetByIsbn(string isbn);
-        List<BoekDTO> GetByTitel(string titel);
-        void Update(BoekDTO boek);
-        void Delete(BoekDTO boek);
+        IEnumerable<BoekDTO> GetByTitel(string titel);
+        IEnumerable<BoekDTO> GetByAuteurID(int auteurId);
+        BoekDTO Insert(BoekDTO boek, List<int> auteurIds);
+        BoekDTO Update(BoekDTO boek, List<int> auteurIds);
     }
 }

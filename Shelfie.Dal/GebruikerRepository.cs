@@ -77,7 +77,7 @@ public class GebruikerRepository : IGebruikerRepository
     {
         return new GebruikerDTO(
             (int)reader["GebruikerID"],
-            reader["GebruikersNaam"].ToString(),
+            reader["Gebruikersnaam"].ToString(),
             reader["Email"].ToString(),
             reader["WachtwoordHash"].ToString(),
             reader["PersoonlijkeInfo"] == DBNull.Value ? null : reader["PersoonlijkeInfo"].ToString(),

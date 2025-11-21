@@ -19,7 +19,9 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="Views\Boekenkast\" />
       <Folder Include="Views\Gebruiker\" />
+      <Folder Include="Views\Search\" />
     </ItemGroup>
 
 </Project>
